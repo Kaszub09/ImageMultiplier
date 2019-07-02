@@ -4,4 +4,4 @@ Creates .png containing multiple copies (number specified by width and height) o
 
 Tint - tints the output with source image.
 
-Samples are on wiki and above.
+Samples are on wiki and above (Hydrangea files).
