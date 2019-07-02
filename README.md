@@ -4,4 +4,4 @@ Creates image containing multiple copies (number specified by width and height) 
 
 Tint - tints the output with source image.
 
-Samples are on wiki.
+Samples are on wiki and above.
