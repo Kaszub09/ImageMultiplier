@@ -27,10 +27,14 @@ namespace ImageMultiplier
         int width;
         int height;
         int percent;
+        String tintSource = null;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.MinHeight = 300;
+            this.MinWidth = 500;
+            tintCheckBox_Click(null, null);
         }
 
         private async void multiplyButton_Click(object sender, RoutedEventArgs e)
@@ -66,7 +70,22 @@ namespace ImageMultiplier
                     multiplyButton.IsEnabled = true;
                     return;
                 }
-                output = await Tint(new Bitmap(filepath), output, percent);
+                bool flag = (bool) tintWithSourceRadioButton.IsChecked;
+                if (flag)
+                {
+                    output = await Tint(new Bitmap(filepath), output, percent);
+                }
+                else
+                {
+                    if (tintSource == null)
+                    {
+                        infoLabel.Content = "Choose tint image.";
+                        return;
+                    }
+                    output = await Tint(new Bitmap(tintSource), output, percent);
+                }
+
+                
             }
 
 
@@ -87,11 +106,12 @@ namespace ImageMultiplier
             {
                 ((IProgress<int>)progressStart).Report(1);
                 source = new Bitmap(filepath);
-                while (source.Width * width > 16385 || source.Height * height > 16385)
+                int scaleX= source.Width * width, scaleY = source.Height * height;
+                while (scaleX > 16385 || scaleY > 16385)
                 {
-                    source = new Bitmap(source, new System.Drawing.Size(source.Width / 2, source.Height / 2));
+                    scaleY /= 2; scaleX /= 2;
                 }
-
+                source = new Bitmap(source, new System.Drawing.Size(scaleX / width, scaleY / height));
                 output = new Bitmap(source.Width * width, source.Height * height);
 
                 unsafe
@@ -117,8 +137,8 @@ namespace ImageMultiplier
                                 sourcePtr -= source.Width;
                             }
                             sourcePtr += source.Width;
-                            ((IProgress<int>)progress).Report((y+1 + j * source.Height) * 100 / output.Height);
-                            
+                            ((IProgress<int>)progress).Report((y + 1 + j * source.Height) * 100 / output.Height);
+
                         }
                         sourcePtr = (int*)sourceBmpData.Scan0;
                     }
@@ -126,7 +146,7 @@ namespace ImageMultiplier
                     output.UnlockBits(outputBmpData);
                 }
             });
-            
+
             source.Dispose();
             return output;
         }
@@ -178,6 +198,47 @@ namespace ImageMultiplier
                 filepath = openFileDialog.FileName;
                 filenameLabel.Content = filepath;
             }             
+        }
+
+        private void dialogTintBoxButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                tintSource = openFileDialog.FileName;
+                tintSourceLabel.Content = tintSource;
+            }
+        }
+
+        private void tintCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            bool flag = tintCheckBox.IsChecked.HasValue ? tintCheckBox.IsChecked.Value : false;
+            if (!flag)
+            {
+
+                tintGrid.Height = 0;
+                Thickness t = multiplyButton.Margin;
+                t.Top = 110;
+                multiplyButton.Margin = t;
+                this.MinHeight =250;
+                Application.Current.MainWindow.Height -=50;
+            }
+            else
+            {
+                tintGrid.Height = 70;
+                Thickness t = multiplyButton.Margin;
+                t.Top = 150;
+                multiplyButton.Margin = t;
+                Application.Current.MainWindow.Height += 50;
+                this.MinHeight = 300;
+
+            }
+            
+           
         }
     }
 }

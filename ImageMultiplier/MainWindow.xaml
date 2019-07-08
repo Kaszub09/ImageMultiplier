@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageMultiplier"
         mc:Ignorable="d"
-        Title="Image Multiplier" Height="250" Width="500">
+        Title="Image Multiplier" Height="300
+        " Width="500">
 
     <Grid Background="#FF1B1B1B">
         <Label  Content="Image:" HorizontalAlignment="Left" Margin="10,10,0,0" Height="30" VerticalAlignment="Top" FontSize="14"/>
@@ -14,13 +15,19 @@
         <TextBox x:Name="heightTextBox" HorizontalAlignment="Left" Height="17" Margin="186,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" FontSize="14" Text="20"/>
         <Label Content="x" HorizontalAlignment="Left" Margin="173,52,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox x:Name="widthTextBox" HorizontalAlignment="Left" Height="17" Margin="116,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" FontSize="14" Text="20"/>
-        <CheckBox x:Name="tintCheckBox" Content="Tint image %" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" FontSize="14" />
+        <CheckBox x:Name="tintCheckBox" Content="Tint image %" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" FontSize="14" Click="tintCheckBox_Click" />
         <Slider x:Name="percentSlider" Margin="116,80,63.6,0" VerticalAlignment="Top" FontSize="14" Maximum="100" SmallChange="1" LargeChange="10" TickPlacement="BottomRight" Value="70" TickFrequency="10" Interval="32" Cursor="Arrow" />
         <Button x:Name="dialogBoxButton" Content="..." Margin="0,10,9.6,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="1.313,0.513" FontSize="14" HorizontalAlignment="Right" Width="30" Click="dialogBoxButton_Click"/>
-        <Button x:Name="multiplyButton" Content="MULTIPLY!" Margin="10,107,9.6,51.6" FontSize="20" Click="multiplyButton_Click"/>
+        <Button x:Name="multiplyButton" Content="MULTIPLY!" Margin="10,155,9.6,52" FontSize="20" Click="multiplyButton_Click"/>
         <TextBox x:Name="percentTextBox" Height="19" Margin="0,80,9.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Right" Width="49" 
                  Text="{Binding ElementName=percentSlider,Path=Value,StringFormat={}{0:F0}}"/>
         <Label x:Name="infoLabel" Content="&#xD;&#xA;" Margin="10,0,9.6,9.6" Height="37" VerticalAlignment="Bottom" FontSize="16"/>
+        <Grid x:Name="tintGrid" Margin="8,110,9.6,0"  Height="40" VerticalAlignment="Top">
+            <RadioButton x:Name="tintNotSourceRadioButton" Content="With:" HorizontalAlignment="Left" Margin="117,15,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="tintWithSourceRadioButton" IsChecked="True" Content="With Source" HorizontalAlignment="Left" Margin="10,15,0,0" Height="14" VerticalAlignment="Top"/>
+            <Label x:Name="tintSourceLabel" Margin="168,0,45,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
+            <Button x:Name="dialogTintBoxButton" Content="..." VerticalAlignment="Top" Height="30" RenderTransformOrigin="1.313,0.513" FontSize="14" HorizontalAlignment="Right" Width="30" Click="dialogTintBoxButton_Click" Margin="0,1,10,0"/>
+        </Grid>
 
     </Grid>
 </Window>

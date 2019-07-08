@@ -171,8 +171,15 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Background" Value="#CCB46228"/>
     </Style>
+    
 
-
+    <Style x:Key="DarkSoulsRadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="Foreground" Value="{StaticResource darkSoulsTextBrush}"/>
+        <Setter Property="FontFamily" Value="OptimusPrinceps"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Background" Value="#CCB46228"/>
+    </Style>
+    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource DarkSoulsRadioButton}"/>
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource DarkSoulsLabel}"/>
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DarkSoulsButton}"/>
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource DarkSoulsTextBox}"/>
