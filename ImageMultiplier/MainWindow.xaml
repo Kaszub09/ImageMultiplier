@@ -9,7 +9,7 @@
         " Width="500">
 
     <Grid Background="#FF1B1B1B">
-        <Label  Content="Image:" HorizontalAlignment="Left" Margin="10,10,0,0" Height="30" VerticalAlignment="Top" FontSize="14"/>
+        <Label  Content="Image(s):" HorizontalAlignment="Left" Margin="10,10,0,0" Height="30" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="filenameLabel" Content="" Margin="66,11,44.6,0" FontSize="14" Height="29" VerticalAlignment="Top"/>
         <Label Content="Width x Height:" HorizontalAlignment="Left" Margin="9,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.866,2.312" FontSize="14"/>
         <TextBox x:Name="heightTextBox" HorizontalAlignment="Left" Height="17" Margin="186,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" FontSize="14" Text="20"/>
